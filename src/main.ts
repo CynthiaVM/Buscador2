@@ -1,5 +1,5 @@
 import {} from './productos/productos';
-import { Producto } from './productos/productos.interfaces';
+import {Producto } from './productos/productos.interfaces';
 
 import './style.css';
 
@@ -12,8 +12,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 </form>
 `;
 
+//const form = document.querySelector('form')!;
 const btnBuscar = document.querySelector<HTMLInputElement>('#buscar-btn')!;
-
 btnBuscar.addEventListener('click', (e) => {
   e.preventDefault();
   //se capturado el valor ingresado por el usuario en la variable inputValue dentro del evento click del botón de búsqueda.
@@ -29,7 +29,7 @@ const productos: Producto[] = [
   { id: 3, nombre: 'Producto 3', precio: 30.99 },
 ];
 
-	//TODo: llamar a la funcion de buscarPorNombre(inpurtValue) con el valor que el usuario ingresio
+	//TODo: llamar a la funcion de buscarPorNombre(inputValue) con el valor que el usuario ingresio
 	// e imprimir en consola el resultado
 
   function buscarPorNombre(inputValue: string): Producto[] {
