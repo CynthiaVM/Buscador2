@@ -6,3 +6,8 @@ export interface Producto {
     nombre: string;
     precio: number;
   }
+
+  export function buscarPorNombre(_nombre: string): Producto[] {
+    // Lógica de búsqueda aquí
+    return []; // Devuelve un arreglo vacío por ahora
+  }
