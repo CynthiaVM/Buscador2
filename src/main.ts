@@ -1,5 +1,5 @@
 import {} from './productos/productos';
-import {Producto } from './productos/productos.interfaces';
+import {buscarPorNombre} from './productos/productos.interfaces';
 
 import './style.css';
 
@@ -9,7 +9,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <label for="search-input">Buscar:</label>
   <input type="text" id="buscar-input">
   <button type="submit" id="buscar-btn">Buscar</button>
-</form>
+  </form>
+  <div id="resultado-busqueda"></div>
 `;
 
 //const form = document.querySelector('form')!;
@@ -17,24 +18,31 @@ const btnBuscar = document.querySelector<HTMLInputElement>('#buscar-btn')!;
 btnBuscar.addEventListener('click', (e) => {
   e.preventDefault();
   //se capturado el valor ingresado por el usuario en la variable inputValue dentro del evento click del botón de búsqueda.
-  const inputValue = document.querySelector<HTMLInputElement>('#buscar-input')!.value;
+  const inputValue = document.querySelector<HTMLInputElement>('#buscar-input')!.value.toUpperCase(); // Convertir a mayúsculas
 
   const resultado = buscarPorNombre(inputValue);
   console.log(resultado);
+//creamos un elemento HTML para mostrar el resultado y agrega los valores 
+const resultadoDiv = document.querySelector<HTMLDivElement>('#resultado-busqueda')!;
+resultadoDiv.innerHTML = ''; // Limpiar contenido anterior
+
+if (resultado.length > 0) {
+  const resultadoHTML = document.createElement('div');
+  resultadoHTML.innerHTML = `
+    <h2>Resultado de la búsqueda</h2>
+    <p>Nombre: ${resultado[0].nombre}</p>
+    <p>Precio: ${resultado[0].precio}</p>
+  `;
+  
+  resultadoDiv.appendChild(resultadoHTML);
+} else {
+  resultadoDiv.innerHTML = 'No se encontraron resultados'; //si el resultado de la búsqueda está vacío, se mostrará el mensaje "No se encontraron resultados"
+}
 });
 
-const productos: Producto[] = [
-  { id: 1, nombre: 'Producto 1', precio: 10.99 },
-  { id: 2, nombre: 'Producto 2', precio: 20.99 },
-  { id: 3, nombre: 'Producto 3', precio: 30.99 },
-];
+
 
 	//TODo: llamar a la funcion de buscarPorNombre(inputValue) con el valor que el usuario ingresio
 	// e imprimir en consola el resultado
 
-  function buscarPorNombre(inputValue: string): Producto[] {
-    const resultados: Producto[] = productos.filter((producto) =>
-      producto.nombre.toLowerCase().includes(inputValue.toLowerCase())
-    );
-    return resultados;
-  }
+ 
