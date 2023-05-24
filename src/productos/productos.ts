@@ -38,10 +38,12 @@ export const buscarPorNombre = (nombre: string): Producto[] => {
   const resultado: Producto[] = productosdb.filter((producto) =>
     producto.nombre.toLowerCase().includes(nombre.toLowerCase())
   );
+
+  console.log('Resultado de búsqueda:', resultado); // Verificar el resultado de la búsqueda
+
   return resultado;
 };
 
-console.log(buscarPorNombre('leche')); // Ejemplo de uso: búsqueda de "leche"
 
 // crear una funcion que busque en el array de productos y devuelva un listado de productos que
 // coincida con el parametro de busqueda ejemplo
